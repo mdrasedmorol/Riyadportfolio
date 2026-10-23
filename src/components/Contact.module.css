@@ -2,6 +2,7 @@
   padding: 8rem 0 6rem;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 100%);
 }
 
 .section::before {
@@ -27,7 +28,7 @@
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1150px;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -54,7 +55,7 @@
 }
 
 .sectionTitle {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -67,14 +68,15 @@
 
 .sectionSubtitle {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.45);
-  max-width: 450px;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 550px;
   margin: 0;
+  line-height: 1.6;
 }
 
 .content {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr 1.35fr;
   gap: 3rem;
   align-items: start;
 }
@@ -83,7 +85,7 @@
 .infoPanel {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.8rem;
 }
 
 .contactItems {
@@ -96,26 +98,26 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 1.2rem;
-  background: rgba(10, 10, 30, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  background: rgba(10, 10, 30, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .contactItem:hover {
-  background: rgba(56, 189, 248, 0.07);
-  border-color: rgba(56, 189, 248, 0.25);
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.35);
   transform: translateX(4px);
 }
 
 .contactIcon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,51 +130,75 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.4);
   margin-bottom: 0.2rem;
 }
 
 .contactValue {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  word-break: break-all;
 }
 
-.socials {
+.cvCard {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(56, 189, 248, 0.12) 100%);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 18px;
+  padding: 1.4rem;
   display: flex;
-  gap: 0.7rem;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
-.socialBtn {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.cvCardTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+}
+
+.cvCardText {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+}
+
+.cvCardDownloadBtn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.55);
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #7c3aed 0%, #38bdf8 100%);
+  color: #fff;
+  padding: 0.65rem 1.3rem;
+  border-radius: 10px;
+  font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s ease;
-  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.2s ease;
+  width: fit-content;
 }
 
-.socialBtn:hover {
-  background: rgba(56, 189, 248, 0.1);
-  border-color: rgba(56, 189, 248, 0.3);
-  color: #38bdf8;
-  transform: translateY(-3px);
+.cvCardDownloadBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
 }
 
 .availability {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.45);
+  gap: 0.7rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
 }
 
 .availabilityDot {
@@ -192,8 +218,8 @@
 
 /* FORM PANEL */
 .formPanel {
-  background: rgba(10, 10, 30, 0.6);
-  border: 1px solid rgba(56, 189, 248, 0.1);
+  background: rgba(10, 10, 30, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.15);
   border-radius: 24px;
   padding: 2.5rem;
   backdrop-filter: blur(10px);
@@ -215,9 +241,9 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 0.9rem 1.2rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   outline: none;
   transition: all 0.3s ease;
   box-sizing: border-box;
@@ -225,13 +251,13 @@
 }
 
 .input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .input:focus {
-  background: rgba(56, 189, 248, 0.05);
-  border-color: rgba(56, 189, 248, 0.45);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.08);
+  background: rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
 }
 
 .textarea {
@@ -249,9 +275,9 @@
   border: none;
   border-radius: 12px;
   color: white;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-heading);
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 25px rgba(14, 165, 233, 0.35);
@@ -313,7 +339,7 @@
 
 .successState p {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.6;
 }
 

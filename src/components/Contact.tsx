@@ -23,41 +23,34 @@ export default function Contact() {
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
       label: t.contact.emailLabel,
-      value: 'sheikh.riad@design.studio',
-      href: 'mailto:sheikh.riad@design.studio',
+      value: t.contact.emailValue,
+      href: `mailto:${t.contact.emailValue}`,
     },
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
       ),
       label: t.contact.phoneLabel,
-      value: '+880 1700 000000',
-      href: 'tel:+8801700000000',
+      value: t.contact.phoneValue,
+      href: `tel:${t.contact.phoneValue.replace(/[^0-9+]/g, '')}`,
     },
     {
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-          <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
       label: t.contact.locationLabel,
-      value: 'Dhaka, Bangladesh',
-      href: '#',
+      value: t.contact.locationValue,
+      href: 'https://maps.google.com/?q=Khulna,+Bangladesh',
     },
-  ];
-
-  const socials = [
-    { name: 'Behance', href: '#', icon: 'Be' },
-    { name: 'Dribbble', href: '#', icon: '⚾' },
-    { name: 'LinkedIn', href: '#', icon: 'in' },
-    { name: 'Instagram', href: '#', icon: '◈' },
   ];
 
   return (
@@ -66,17 +59,24 @@ export default function Contact() {
 
       <div className={styles.container}>
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionLabel}>Contact</span>
+          <span className={styles.sectionLabel}>{t.contact.sectionLabel}</span>
           <h2 className={styles.sectionTitle}>{t.contact.sectionTitle}</h2>
           <p className={styles.sectionSubtitle}>{t.contact.sectionSubtitle}</p>
         </div>
 
         <div className={styles.content}>
-          {/* Left – Info */}
+          {/* Left – Real Contact info & CV Download card */}
           <div className={styles.infoPanel}>
             <div className={styles.contactItems}>
               {contactItems.map((item, i) => (
-                <a key={i} href={item.href} className={styles.contactItem} id={`contact-item-${i}`}>
+                <a
+                  key={i}
+                  href={item.href}
+                  className={styles.contactItem}
+                  id={`contact-item-${i}`}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
                   <div className={styles.contactIcon}>{item.icon}</div>
                   <div>
                     <div className={styles.contactLabel}>{item.label}</div>
@@ -86,17 +86,29 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className={styles.socials}>
-              {socials.map((s, i) => (
-                <a key={i} href={s.href} className={styles.socialBtn} id={`social-${s.name.toLowerCase()}`} aria-label={s.name}>
-                  <span>{s.icon}</span>
-                </a>
-              ))}
+            {/* Resume / CV Card */}
+            <div className={styles.cvCard}>
+              <div className={styles.cvCardTitle}>
+                <span>📄</span>
+                <span>Curriculum Vitae</span>
+              </div>
+              <p className={styles.cvCardText}>{t.contact.downloadCvText}</p>
+              <a
+                href="/Sheikh-Riyad-Hassan-CV.pdf"
+                download="Sheikh-Riyad-Hassan-CV.pdf"
+                className={styles.cvCardDownloadBtn}
+                id="contact-download-cv-btn"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                </svg>
+                <span>Download CV (PDF)</span>
+              </a>
             </div>
 
             <div className={styles.availability}>
               <div className={styles.availabilityDot}></div>
-              <span>Open to new projects & collaborations</span>
+              <span>{t.contact.availabilityText}</span>
             </div>
           </div>
 
@@ -154,7 +166,7 @@ export default function Contact() {
                     <>
                       <span>{t.contact.sendButton}</span>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                       </svg>
                     </>
                   )}

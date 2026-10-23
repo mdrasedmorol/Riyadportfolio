@@ -6,6 +6,7 @@ import { Language, languageNames } from '@/lib/translations';
 import styles from './Navbar.module.css';
 
 const languages: Language[] = ['en', 'bn', 'hi', 'zh'];
+const navSections = ['home', 'about', 'skills', 'experience', 'portfolio', 'contact'] as const;
 
 export default function Navbar() {
   const { t, language, setLanguage } = useLanguage();
@@ -17,10 +18,10 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      const sections = ['home', 'experience', 'portfolio', 'contact'];
-      for (const sec of sections.reverse()) {
+      const sections = ['home', 'about', 'skills', 'experience', 'portfolio', 'contact'];
+      for (const sec of sections.slice().reverse()) {
         const el = document.getElementById(sec);
-        if (el && window.scrollY >= el.offsetTop - 100) {
+        if (el && window.scrollY >= el.offsetTop - 120) {
           setActiveSection(sec);
           break;
         }
@@ -44,7 +45,7 @@ export default function Navbar() {
         </div>
 
         <ul className={`${styles.navLinks} ${menuOpen ? styles.open : ''}`}>
-          {(['home', 'experience', 'portfolio', 'contact'] as const).map((section) => (
+          {navSections.map((section) => (
             <li key={section}>
               <button
                 className={`${styles.navLink} ${activeSection === section ? styles.active : ''}`}
@@ -55,9 +56,39 @@ export default function Navbar() {
               </button>
             </li>
           ))}
+
+          {/* Mobile Download CV Link */}
+          <li>
+            <a
+              href="/Sheikh-Riyad-Hassan-CV.pdf"
+              download="Sheikh-Riyad-Hassan-CV.pdf"
+              className={styles.mobileDownloadBtn}
+              onClick={() => setMenuOpen(false)}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              <span>{t.nav.downloadCv}</span>
+            </a>
+          </li>
         </ul>
 
         <div className={styles.actions}>
+          {/* Prominent Desktop Download CV Button */}
+          <a
+            href="/Sheikh-Riyad-Hassan-CV.pdf"
+            download="Sheikh-Riyad-Hassan-CV.pdf"
+            className={styles.navDownloadBtn}
+            id="nav-download-cv-btn"
+            title="Download Curriculum Vitae (PDF)"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+            </svg>
+            <span>{t.nav.downloadCv}</span>
+          </a>
+
+          {/* Language Switcher */}
           <div className={styles.langSelector}>
             <button
               className={styles.langButton}
@@ -85,6 +116,7 @@ export default function Navbar() {
             )}
           </div>
 
+          {/* Mobile Hamburger */}
           <button
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}

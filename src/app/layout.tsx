@@ -3,29 +3,34 @@ import './globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
-  title: 'Sheikh Riad Hasan – Senior Graphic Designer',
+  title: 'Sheikh Riyad Hassan – Graphic Designer & Video Editor',
   description:
-    'Portfolio of Sheikh Riad Hasan, a senior graphic designer with 10+ years of experience working with Google, Meta, Adobe, and Ogilvy. Specializing in brand identity, UI/UX design, and visual communication.',
+    'Portfolio of Sheikh Riyad Hassan, Graphic Designer & Video Editor with 5+ years of experience specializing in visual branding, poster design, brand identity, social media graphics, marketing materials and video editing.',
   keywords: [
-    'graphic designer',
-    'brand identity',
-    'UI/UX designer',
-    'Sheikh Riad Hasan',
-    'portfolio',
-    'visual design',
-    'motion design',
+    'Sheikh Riyad Hassan',
+    'Graphic Designer',
+    'Video Editor',
+    'Brand Identity',
+    'Social Media Design',
+    'Poster Design',
+    'Print Design',
+    'Motion Graphics',
+    'Premiere Pro',
+    'Adobe Creative Cloud',
+    'Khulna Bangladesh',
   ],
-  authors: [{ name: 'Sheikh Riad Hasan' }],
+  authors: [{ name: 'Sheikh Riyad Hassan' }],
   openGraph: {
-    title: 'Sheikh Riad Hasan – Senior Graphic Designer',
-    description: 'Senior graphic designer with 10+ years at Google, Meta, Adobe & Ogilvy.',
+    title: 'Sheikh Riyad Hassan – Graphic Designer & Video Editor',
+    description: 'Graphic Designer & Video Editor with 5+ years of experience turning ideas into visual impact.',
     type: 'website',
-    images: ['/designer-portrait.jpg'],
+    images: ['/sheikh-riyad-portrait.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sheikh Riad Hasan – Senior Graphic Designer',
-    description: 'Senior graphic designer with 10+ years at Google, Meta, Adobe & Ogilvy.',
+    title: 'Sheikh Riyad Hassan – Graphic Designer & Video Editor',
+    description: 'Graphic Designer & Video Editor with 5+ years of experience turning ideas into visual impact.',
+    images: ['/sheikh-riyad-portrait.jpg'],
   },
 };
 
@@ -35,12 +40,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>

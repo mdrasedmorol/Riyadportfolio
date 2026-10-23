@@ -43,11 +43,11 @@ body {
   background: #05050f;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #7c3aed, #e879f9);
+  background: linear-gradient(to bottom, #7c3aed, #38bdf8);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #a855f7, #f0abfc);
+  background: linear-gradient(to bottom, #a855f7, #7dd3fc);
 }
 
 /* Selection */
@@ -76,6 +76,8 @@ body::before {
 
 /* Section alternating backgrounds */
 #home { background: var(--color-bg); }
+#about { background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 100%); }
+#skills { background: var(--color-bg); }
 #experience { background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 50%, var(--color-bg) 100%); }
 #portfolio { background: var(--color-bg); }
 #contact { background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-2) 100%); }

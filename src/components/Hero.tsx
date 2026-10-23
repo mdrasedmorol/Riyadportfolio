@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import styles from './Hero.module.css';
@@ -8,6 +8,36 @@ import styles from './Hero.module.css';
 export default function Hero() {
   const { t } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Animated words for the quote pill — sequential reveal
+  const words = ['Design', 'Create', 'Inspire'];
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [phase, setPhase] = useState<'building' | 'complete' | 'resetting'>('building');
+
+  useEffect(() => {
+    if (phase === 'building') {
+      if (visibleCount < words.length) {
+        const timer = setTimeout(() => {
+          setVisibleCount((prev) => prev + 1);
+        }, 700);
+        return () => clearTimeout(timer);
+      } else {
+        setPhase('complete');
+      }
+    } else if (phase === 'complete') {
+      // Hold all three visible for a moment, then reset
+      const timer = setTimeout(() => {
+        setPhase('resetting');
+      }, 2000);
+      return () => clearTimeout(timer);
+    } else if (phase === 'resetting') {
+      const timer = setTimeout(() => {
+        setVisibleCount(0);
+        setPhase('building');
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [phase, visibleCount, words.length]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -86,25 +116,76 @@ export default function Hero() {
 
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.badge}>
-            <span className={styles.badgeDot}></span>
-            Available for freelance
+          <div className={styles.topBarGroup}>
+            <div className={`${styles.quotePill} ${phase === 'resetting' ? styles.quotePillResetting : ''}`}>
+              <span className={styles.quoteStatic}>
+                {words.map((word, index) => {
+                  const isRevealed = index < visibleCount;
+                  const isLatest = index === visibleCount - 1 && phase === 'building';
+                  return (
+                    <span key={word} className={styles.quoteWordGroup}>
+                      {index > 0 && (
+                        <span
+                          className={`${styles.quoteDot} ${isRevealed ? styles.quoteDotVisible : ''}`}
+                        >
+                          &middot;
+                        </span>
+                      )}
+                      <span
+                        className={`${styles.quoteWord} ${
+                          isRevealed
+                            ? isLatest
+                              ? styles.quoteWordLatest
+                              : styles.quoteWordRevealed
+                            : styles.quoteWordHidden
+                        }`}
+                      >
+                        {word}
+                      </span>
+                    </span>
+                  );
+                })}
+              </span>
+            </div>
           </div>
 
           <p className={styles.greeting}>{t.hero.greeting}</p>
-          <h1 className={styles.name}>{t.hero.name}</h1>
+          <div className={styles.nameWrapper}>
+            <h1 className={styles.name}>{t.hero.name}</h1>
+            <span
+              className={styles.activeIndicator}
+              title="Active now"
+              aria-label="Active now"
+            >
+              <span className={styles.activeDot}></span>
+              <span className={styles.activePing}></span>
+            </span>
+          </div>
           <div className={styles.titleWrapper}>
             <span className={styles.title}>{t.hero.title}</span>
           </div>
           <p className={styles.subtitle}>{t.hero.subtitle}</p>
 
           <div className={styles.ctas}>
+            <a
+              href="/Sheikh-Riyad-Hassan-CV.pdf"
+              download="Sheikh-Riyad-Hassan-CV.pdf"
+              className={styles.ctaDownload}
+              id="hero-download-cv-btn"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              <span>{t.hero.downloadCv}</span>
+            </a>
+
             <button className={styles.ctaPrimary} onClick={scrollToPortfolio} id="hero-cta-primary">
               <span>{t.hero.cta}</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </button>
+
             <button className={styles.ctaSecondary} onClick={scrollToContact} id="hero-cta-secondary">
               {t.hero.ctaSecondary}
             </button>
@@ -132,31 +213,16 @@ export default function Hero() {
           <div className={styles.imageBorder}>
             <div className={styles.imageInner}>
               <Image
-                src="/sheikh-riad-hasan.jpg"
-                alt="Sheikh Riad Hasan - Senior Graphic Designer"
-                width={682}
-                height={1024}
+                src="/sheikh-riyad-hero.png"
+                alt="Sheikh Riyad Hassan - Graphic Designer & Video Editor"
+                width={1086}
+                height={1448}
                 className={styles.portrait}
                 priority
+                quality={100}
               />
             </div>
           </div>
-          <div className={styles.floatingCard1}>
-            <span className={styles.cardIcon}>🎨</span>
-            <div>
-              <div className={styles.cardTitle}>Brand Design</div>
-              <div className={styles.cardSub}>Visual Identity</div>
-            </div>
-          </div>
-          <div className={styles.floatingCard2}>
-            <span className={styles.cardIcon}>✦</span>
-            <div>
-              <div className={styles.cardTitle}>Cannes Lions</div>
-              <div className={styles.cardSub}>Award Winner</div>
-            </div>
-          </div>
-          <div className={styles.imageDeco1}></div>
-          <div className={styles.imageDeco2}></div>
         </div>
       </div>
 
